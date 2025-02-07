@@ -84,7 +84,7 @@ func (c clientImpl) NewConsumer(config ConsumerConfig) (Consumer, error) {
 		tylog.Error("create consumer failed", tylog.ErrorField(err), tylog.Any("config", config))
 		return nil, err
 	}
-	tylog.Info("create consumer success", tylog.Any("config", config))
+	// tylog.Info("create consumer success", tylog.Any("config", config))
 	return consumerV2{consumer}, nil
 }
 
