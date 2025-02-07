@@ -72,7 +72,7 @@ func (c clientImpl) NewConsumer(config ConsumerConfig) (Consumer, error) {
 			tylog.Error("create clientImpl failed", tylog.ErrorField(err), tylog.Any("config", c.clientCfg))
 			return nil, err
 		}
-		tylog.Info("create clientImpl success", tylog.Any("config", c.clientCfg))
+		// tylog.Info("create clientImpl success", tylog.Any("config", c.clientCfg))
 		c.cli = client
 	}
 	consumer, err := c.cli.Subscribe(pulsar.ConsumerOptions{
