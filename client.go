@@ -103,14 +103,14 @@ func (c consumerV2) ReceiveAndHandle(ctx context.Context, handler PayloadHandler
 				}
 				start := time.Now()
 				id := MsgId(msg.ID())
-				fmt.Println("consume receive", tylog.Any("messageId", id))
+				// fmt.Println("consume receive", tylog.Any("messageId", id))
 				err = handler.HandlePayload(ctx, msg, msg.Payload())
 				if err != nil {
 					tylog.Warn("consumer HandlePayload failed", tylog.ErrorField(err), tylog.Any("consumer", c.consumer), tylog.Any("msg", msg))
 				}
 				duration := time.Since(start)
 				ackStart := time.Now()
-				fmt.Println("consume handle finish", tylog.Any("messageId", id), tylog.Any("cost", duration))
+				// fmt.Println("consume handle finish", tylog.Any("messageId", id), tylog.Any("cost", duration))
 				retryCount := 3
 				for j := 0; j < retryCount; j++ {
 					err := c.consumer.Ack(msg)
@@ -122,7 +122,7 @@ func (c consumerV2) ReceiveAndHandle(ctx context.Context, handler PayloadHandler
 					}
 				}
 				ackDuration := time.Since(ackStart)
-				fmt.Println("consume ack finish", tylog.Any("messageId", id), tylog.Any("cost", ackDuration))
+				// fmt.Println("consume ack finish", tylog.Any("messageId", id), tylog.Any("cost", ackDuration))
 			}
 		}()
 	}
